@@ -106,6 +106,81 @@ form.addEventListener("submit", function (event) {
 
     const discountAmount = fareBeforeDiscount * discountRate;
     const taxiFare = fareBeforeDiscount - discountAmount;
+    result.innerHTML = `
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+
+                <h4 class="mb-0">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Ride Fare Calculated
+                </h4>
+
+            </div>
+        
+            <div class="card-body">
+
+                <p>
+                    <strong>From:</strong>
+                    ${pickUp}
+                </p>
+
+                <p>
+                    <strong>To:</strong>
+                    ${destination}
+                </p>
+
+                <p>
+                    <strong>Distance:</strong>
+                    ${distance} KM
+                </p>
+
+                <p>
+                    <strong>Price per KM:</strong>
+                    ${farePerKm} Birr
+                </p>
+
+                <p>
+                    <strong>Base Fare:</strong>
+                    ${baseFare.toFixed(2)} Birr
+                </p>
+
+                <p>
+                    <strong>Basic Fare:</strong>
+                    ${totalFare.toFixed(2)} Birr
+                </p>
+
+                <p>
+                    <strong>Service:</strong>
+                    ${service === "peak" ? "Peak Hour" : "Regular Schedule"}
+                </p>
+
+                <p>
+                    <strong>Peak Hour Charge:</strong>
+                    ${peakCharge.toFixed(2)} Birr
+                </p>
+
+                <p>
+                    <strong>Discount:</strong>
+                    ${discountReason}
+                </p>
+
+                <p>
+                    <strong>Discount Amount:</strong>
+                    ${discountAmount.toFixed(2)} Birr
+                </p>
+
+                <hr>
+
+                <h4 class="text-success">
+                    Total Fare: ${taxiFare.toFixed(2)} Birr
+                </h4>
+
+            </div>
+
+        </div>
+
+    `;
+    result.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 form.addEventListener("reset", function () {
     result.innerHTML = "";
