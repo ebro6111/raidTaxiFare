@@ -76,6 +76,36 @@ form.addEventListener("submit", function (event) {
 
         return;
     }
+    const totalFare = baseFare + (farePerKm * distance);
+    let peakCharge = 0;
+    if (service === "peak") {
+        peakCharge = totalFare * 0.30;
+    }
+    const fareBeforeDiscount = totalFare + peakCharge;
+
+
+    let discountRate = 0;
+    let discountReason = "No Discount";
+
+    if (discountType === "student") {
+
+        discountRate = 0.08;
+        discountReason = "Student Discount (8%)";
+
+    } else if (discountType === "lowIncome") {
+
+        discountRate = 0.10;
+        discountReason = "Low Income Discount (10%)";
+
+    } else if (discountType === "disability") {
+
+        discountRate = 0.30;
+        discountReason = "Disability Discount (30%)";
+
+    }
+
+    const discountAmount = fareBeforeDiscount * discountRate;
+    const taxiFare = fareBeforeDiscount - discountAmount;
 });
 form.addEventListener("reset", function () {
     result.innerHTML = "";
